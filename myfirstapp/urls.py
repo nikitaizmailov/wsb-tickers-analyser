@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('wsb/', include('wsb.urls')),
+    path('', include('wsb.urls')),
     # path('stocks/', include('stocks.urls')),
     # path('reddit/', include('reddit.urls')),
     path('grappelli', include('grappelli.urls')),

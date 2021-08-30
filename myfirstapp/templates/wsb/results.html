@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+    {% if object_dict %}
+        <h2>Results:</h2>
+        <hr>
+        <ul class="list-group" style="list-style-type:none">    
+            <div class='row'>
+                <div class="col">
+                    <li class="list-group-item">
+                        <b>Subreddit name:</b>
+                        <ul>
+                            <li>
+                                {{object_dict.subreddit_name}}
+                            </li>
+                        </ul>
+                        <b>Submission title</b>
+                        <ul>
+                            <li>
+                                {{object_dict.submission_title}}
+                            </li>
+                        </ul>
+                        <b>Regex pattern</b>
+                        <ul>
+                            <li>
+                                {{object_dict.regex_pattern}}
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </div>
+        </ul>
+    {% else %}
+        <div class='row'>
+            <div class="w-50 mx-auto">
+                <p>You have not provided any details about Subreddit, Subreddit's submission and Regex Pattern</p>
+                <p>Please <a href="{% url 'wsb:home' %}">click here</a> to be redirected back to the home page</p>
+            </div>
+        </div>
+    {% endif %}
+    {% if chart %}
+        <div class='align-self-center'>
+            <img class='mx-auto d-block' src='data:image/png;base64,{{ chart }}'>
+        </div>
+    {% endif %}
+
+    <div class='row'>
+        <ul class="list-group" style="list-style-type:none">
+            <li class="list-group-item">
+                <p><b>Extraction Comepleted!</b><br>
+                Total number of comments extracted: {{ comms_extracted }}<br>
+                {{ comments|length }} times {{ regex_pattern }} was mentioned in the submission<br>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <p><b>Below are the comments where the REGEX pattern was mentioned:</b><br>
+                {% for comment in comments %}
+                    {{ forloop.counter }}. {{comment}}<br>
+                {% endfor %}
+                </p>
+            </li>
+        </ul>
+    </div>
+
+{% endblock %}

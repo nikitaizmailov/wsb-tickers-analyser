@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    r/wallstreetbets
+{% endblock %}
+
+{% block content %}
+    <h2>Want to query a WSB database?</h2>
+    <hr>
+    <p><h4>Instructions:</h4>
+    <ol>
+        <li>Provide a real subreddit name.</li>
+        <li>Provide an actual title of the post/submission from the "Hot" filter (currently does not support for all submissions)</li>
+        <li>Provide a tickers you want to find mentions for in comments. ex: VIAC|AMC|GME or GME for single ticker.</li>
+        <li>It will take time if the submission has more than 300 comments, so just be patient.</li>
+    </ol>
+    </p>
+    <hr>
+    <form action="{% url 'wsb:create_q' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                {{ form.subreddit_name|as_crispy_field }}
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                {{ form.submission_title|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.regex_pattern|as_crispy_field }}
+        <div class="form-row">
+            <div class="form-group col-md-6 mb-0">
+                <input type="submit" class="btn btn-primary" name="generate_analysis_button" value='Generate Analysis'>
+            </div>
+            <div class="form-group col-md-6 mb-0">
+                <input type="submit" class="btn btn-primary" name="last_comments_button" value='Display Last 1000 Comments'>
+            </div>
+        </div>
+
+    </form>
+    <br>
+    <h3> Last 5 queries made by users:</h3>
+    <hr>
+    {% if latest_subreddits %}
+        {% for subr in latest_subreddits%}
+            <ul class="list-group" style="list-style-type:none">    
+                <div class='row'>
+                    <div class="col">
+                        <li class="list-group-item">
+                            Subreddit: <a href="{% url 'wsb:detail' subr.id %}">{{subr.subreddit_name}}</a>
+                        </li>
+                    </div>
+                    <div class="col">
+                        <li class="list-group-item">
+                            <b>Submission Title:</b>
+                            <ul>
+                                <li>
+                                    {{subr.submission_title}}
+                                </li>
+                            </ul>
+                            <b>Regex Pattern:</b>
+                            <ul>
+                                <li>
+                                {{subr.regex_pattern}}
+                                </li>
+                            </ul>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+            <br>
+        {% endfor %}
+    {% else %}
+        <h3>There are no past historical searches. Be the first one to make the query!</h3>
+    {% endif %}
+{% endblock %}

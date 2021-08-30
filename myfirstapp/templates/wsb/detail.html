@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+<h1>{{ subr.submission_title }}</h1>
+{% endblock %}
+
+{% block content %}
+
+{% if latest_comments %}
+
+    {% for c in latest_comments %}
+        <p>
+            <strong>{{c.author_name}}</strong>
+            <p>{{c.comment_text}}</p>
+        </p>
+    {% endfor %}
+
+{% else %}
+Comments not found! Lol! Be the first one to break this streak
+{% endif %}
+<hr>
+
+
+<form action="{% url 'wsb:leave_comment' subr.id %}" method="POST">
+
+    {% csrf_token %}
+
+    <input type="text" required placeholder="Your Name" name="name"><br>
+    <textarea name="text" required placeholder="Your Comment" cols="30" rows="10"></textarea><br>
+
+    <button type="submit">Leave comment</button>
+
+</form>
+
+{% endblock %}

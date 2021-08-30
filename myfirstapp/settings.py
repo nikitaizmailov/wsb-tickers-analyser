@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-$n)i%87m@nh4zdf@3yrdqpouq(*ut4@=p86f$$ns5y)76fz23w
 DEBUG = True
 
 #ALLOWED_HOSTS = ['https://wsb-nikitaizm.herokuapp.com', 'wsb-nikitaizm.herokuapp.com', 'wsb-nikitaizm.herokuapp.com/', '127.0.0.1']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['wsb-nikitaizm.herokuapp.com', 'https://wsb-nikitaizm.herokuapp.com', '127.0.0.1']
 
 
 # Application definition

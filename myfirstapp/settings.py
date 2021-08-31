@@ -105,17 +105,21 @@ WSGI_APPLICATION = 'myfirstapp.wsgi.application'
 #     }
 # }
 
+# mysql-client==0.0.1
+
 # Connected to my MySQL database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_db',
-        'USER': 'root',
-        'PASSWORD': 'Blackstar5140!',
+        'USER': 'test_admin',
+        'PASSWORD': 'test_admin',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

@@ -108,13 +108,25 @@ WSGI_APPLICATION = 'myfirstapp.wsgi.application'
 # mysql-client==0.0.1
 
 # Connected to my MySQL database
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'django_db',
+#         'USER': 'test_admin',
+#         'PASSWORD': 'test_admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306',
+#     }
+# }
+
+# Now connected to my RDS Amazon Web Services Database. Fully online!
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_db',
-        'USER': 'root',
-        'PASSWORD': 'Blackstar5140!',
-        'HOST': '127.0.0.1',
+        'NAME': 'reddit_data',
+        'USER': 'admin',
+        'PASSWORD': 'Africawelcome1999fjfj!',
+        'HOST': 'db-reddit-analyser.ckshwcqlnwm8.eu-west-2.rds.amazonaws.com',
         'PORT': '3306',
     }
 }
